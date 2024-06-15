@@ -1,0 +1,169 @@
+
+
+Q1)   https://www.hackerrank.com/challenges/capitalize/problem?isFullScreen=true
+
+Solution:  
+
+         def solve(s):
+ l=[]
+    for i in s:
+        l.append(i)
+    l[0] = l[0].upper()  
+    for i in range(1,len(l)):
+        if l[i-1]==" ":
+            l[i] = l[i].upper()
+    ans = "".join(l)
+    return ans
+
+
+
+Q2)  https://www.hackerrank.com/challenges/py-introduction-to-sets/problem?isFullScreen=true
+
+Solution :
+
+          def average(array):
+   
+    h = set(arr)
+    return f"{sum(h) / len(h):.3f}"
+
+
+
+Q3)    https://hackerrank.com/challenges/text-wrap/problem?isFullScreen=true
+
+
+Solution : 
+
+           def wrap(string, max_width):
+    a = [string[i: i + max_width] for i in range(0, len(string), max_width)]
+    return '\n'.join(a)
+
+
+
+Q4) https://www.hackerrank.com/challenges/alphabet-rangoli/problem?isFullScreen=true
+
+
+Solution : 
+
+
+         def print_rangoli(s):
+    # your code goes here
+    ab='abcdefghijklmnopqrstuvwxyz'
+    mid=((n+(n-1))*2)-1
+    rev=[]
+    for i in range(s):
+        r=''
+        k=''
+        for j in range(i+1):
+            if j==i:
+                r+=ab[s-1-j]
+                top=r+k[::-1]
+                t=top.center(mid,"-")
+                rev.append(t)
+                print(t)
+            else:
+                r+=ab[s-1-j]+"-"
+                k=r
+    for i in range(s-1):
+        print(rev[s-2-i])
+
+
+
+Q5)  https://www.hackerrank.com/challenges/merge-the-tools/problem?isFullScreen=true
+
+Solution : 
+
+          def merge_the_tools(string, k):
+    for i in range(0, len(string), k):
+        s = string[i: i+k]
+        result = ''
+        dic = {}
+        for c in s:
+            dic[c] = 1 + dic.get(c, 0)
+            if dic[c] == 1:
+                result += c
+        print(result)
+
+
+
+Q6)  https://www.hackerrank.com/challenges/collections-counter/problem?isFullScreen=true
+
+Solution :  
+
+          if __name__=="__main__":
+    n_shoes=int(input())
+    shoe_lst=list(map(int,input().split()))
+    n_cust=int(input())
+    profit=0
+    for i in range(n_cust):
+        purch=list(map(int,input().split()))
+        size=purch[0]
+        cost=purch[1]
+        if(size in shoe_lst):
+            profit+=cost
+            shoe_lst.remove(size)
+    print(profit)
+
+
+
+Q7)   https://www.hackerrank.com/challenges/exceptions/problem?isFullScreen=true
+
+Solution :  
+
+            if __name__ == '__main__':
+    t = int(input().rstrip())
+    for i in range(t):
+        a, b = input().rstrip().split()
+        try:
+            print(int(a) // int(b))
+        except ZeroDivisionError as e:
+            print('Error Code: integer division or modulo by zero')
+        except ValueError as e:
+            print(f'Error Code: {e}')
+
+
+
+Q8)  https://www.hackerrank.com/challenges/incorrect-regex/problem?isFullScreen=true
+
+Solution:  
+
+          import re
+n = int(input())
+for _ in range(n):
+    try:
+        s = input()
+        p = re.compile(s)
+        print("True")
+    except re.error:
+        print("False")
+
+
+Q9)  https://www.hackerrank.com/challenges/py-set-discard-remove-pop/problem?isFullScreen=true
+
+Solution : 
+            n = input()
+s = [val for val in input().split(" ")]
+s = s[::-1]
+s = set(s)
+N = int(input())
+
+for _ in range(N):
+    command = input().split(" ")
+    try:
+        if command[0] == "pop":
+            s.pop()
+        elif command[0] == "discard":
+            s.discard(command[1])
+        else:
+            s.remove(command[1])
+    except Exception as e:
+        continue
+print(sum(map(int, s)))
+
+
+
+
+
+
+
+
+
