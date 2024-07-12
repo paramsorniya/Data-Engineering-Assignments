@@ -1,0 +1,21 @@
+1)   SELECT DISTINCT CITY FROM STATION WHERE LEFT(CITY,1) IN ('a','e','i','o' ,'u') AND RIGHT(CITY,1) IN ('a','e','i','o' ,'u')
+
+2)SELECT ROUND( SQRT( POWER ( (SELECT MAX(LAT_N) FROM STATION)- (SELECT MIN(LAT_N) FROM STATION ),2)+ POWER ( (SELECT MAX(LONG_W) FROM STATION)- (SELECT MIN(LONG_W) FROM STATION ),2) ),4) AS EUCLIDEAN FROM STATION ORDER BY EUCLIDEAN LIMIT 1
+
+3)SELECT MAX(population)-MIN(population) FROM city;
+
+4)with median as ( select lat_n as lat,row_number() over (order by lat_n asc) as rank from station ) select case when count(lat_n)%2=0 then (select ROUND(CAST((lat) as DECIMAL(6,4)),4) from median where rank=count(lat_n)/2) else (select ROUND(CAST((lat) as DECIMAL(6,4)),4) from median where rank=(count(lat_n)+1)/2) end from median m, station s where m.lat=s.lat_n
+
+5)SELECT CITY.NAME FROM CITY INNER JOIN COUNTRY ON CITY.COUNTRYCODE=COUNTRY.CODE WHERE COUNTRY.CONTINENT ="Africa";
+
+6)WITH M_A AS (SELECT NAME, MARKS FROM STUDENTS), GR_A AS (SELECT GRADE, MIN_MARK, MAX_MARK FROM GRADES)
+SELECT CASE WHEN GRADE >= 8 THEN NAME ELSE 'NULL' END as NAME, GRADE, MARKS FROM GR_A, M_A WHERE MARKS BETWEEN MIN_MARK AND MAX_MARK ORDER BY GRADE DESC, CASE WHEN GRADE >= 8 THEN NAME ELSE MARKS END ASC
+
+7)SELECT CITY.NAME FROM CITY JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE WHERE CONTINENT = 'AFRICA';
+
+8)SELECT S.hacker_id, H.name FROM Submissions AS S LEFT JOIN Challenges AS C ON S.challenge_id = C.challenge_id LEFT JOIN Difficulty as D ON C.difficulty_level = D.difficulty_level LEFT JOIN Hackers as H ON S.Hacker_id = H.Hacker_id WHERE S.score = D.score GROUP BY S.Hacker_id, H.name HAVING COUNT(S.challenge_id) >1 ORDER BY COUNT(S.challenge_id) DESC, S.Hacker_id
+
+9)select W.id, P.age, W.coins_needed, W.power from Wands W join Wands_Property P on W.code = P.code where W.coins_needed in (select min(w2.coins_needed) from Wands w2 join wands_property p2 on w2.code = p2.code where w2.power = w.power and p2.age = P.age and p2.is_evil = 0) order by W.power desc, P.age desc;
+
+10)select hacker_id,name,sum(score) as score from (select s.hacker_id ,h.name ,s.challenge_id ,Max(s.score) as score from Hackers as h inner join submissions as s on h.hacker_id = s.hacker_id
+group by s.hacker_id,h.name,s.challenge_id order by s.hacker_id,h.name,s.challenge_id ) as x group by hacker_id,name having sum(score) > 0 order by score desc,hacker_id asc;
